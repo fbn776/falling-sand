@@ -18,6 +18,7 @@ function generateGrid(rows, cols) {
 	}
 	return arr;
 }
+
 let width = window.innerWidth;
 let height = window.innerHeight;
 

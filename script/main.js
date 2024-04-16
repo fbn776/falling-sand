@@ -20,10 +20,30 @@ const MAX_SOURCE_BLOCKS = 10;
 
 let currTile = "sand";
 let allowSourceBlock = true;
+let isMouseDown = false;
+
 canvas.ontouchmove = placeTile;
 canvas.onclick = placeTile;
+canvas.onmousedown = placeTile;
 
+canvas.onmousedown = () => {
+	isMouseDown = true;
+}
 
+canvas.onmouseup = () => {
+	isMouseDown = false;
+}
+
+function startAction(e) {
+	if (isMouseDown) {
+		placeTile(e);
+		requestAnimationFrame(() => { startAction(e) });
+	}
+}
+
+canvas.onmousemove = (e) => {
+	startAction(e);
+};
 
 function draw() {
 	ctx.clearRect(0, 0, cw, ch);
@@ -74,13 +94,12 @@ function draw() {
 	window.requestAnimationFrame(draw);
 };
 
-s(".start-menu").onclick = function(){
+s(".start-menu").onclick = function () {
 	this.remove();
-	fullscreen(document.body);
 	draw();
 }
 
-function clearGrid(){
+function clearGrid() {
 	grid_arr = generateGrid(rows, cols);
 	source_block = [];
 }

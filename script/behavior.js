@@ -43,6 +43,7 @@ function SandBehavior(cls, adj) {
 		swap(adj.o, adj.dbr);
 	}
 };
+
 /*Same as Liquid Behavior, but reversed in direction*/
 function GasBehavior(cls, adj, ticks) {
 	if (cls.updates % ticks == 0) {
